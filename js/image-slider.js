@@ -138,5 +138,6 @@ function initializeWorksSlider() {
   }, 5000);
 }
 
-// モジュールとしてエクスポート
-export { initializeSliders, initializeWorksSlider };
+// グローバル関数として定義
+window.initializeSliders = initializeSliders;
+window.initializeWorksSlider = initializeWorksSlider;

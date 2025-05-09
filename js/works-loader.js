@@ -130,5 +130,5 @@ async function initializeWorks() {
   }
 }
 
-// モジュールとしてエクスポート
-export { initializeWorks }; 
+// グローバル関数として定義
+window.initializeWorks = initializeWorks; 
