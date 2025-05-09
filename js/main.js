@@ -36,15 +36,17 @@ const imageData = {
 // ページ読み込み完了時の処理
 document.addEventListener('DOMContentLoaded', () => {
   // スライダーの初期化
-  import('./image-slider.js').then(module => {
-    module.initializeSliders();
-    module.initializeWorksSlider();
-  });
+  if (typeof initializeSliders === 'function') {
+    initializeSliders();
+  }
+  if (typeof initializeWorksSlider === 'function') {
+    initializeWorksSlider();
+  }
   
   // 作品セクションの初期化
-  import('./works-loader.js').then(module => {
-    module.initializeWorks();
-  });
+  if (typeof initializeWorks === 'function') {
+    initializeWorks();
+  }
   
   // ナビゲーションバーのスクロール効果
   const navbar = document.getElementById('navbar');
