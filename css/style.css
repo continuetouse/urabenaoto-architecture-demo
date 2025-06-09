@@ -524,11 +524,6 @@
     min-height: 100vh;
     padding: 8rem 0;
     background-color: var(--light-bg);
-    background-image: url('../images/contact/contact-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     overflow: hidden;
   }
 

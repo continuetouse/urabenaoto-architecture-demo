@@ -22,32 +22,32 @@ const worksData = [
 const worksCategories = {
   residential: {
     title: '住宅インナー',
-    folder: '住宅',
+    folder: 'residential',
     description: '住宅設計の実績'
   },
   commercial: {
     title: '商業施設インナー',
-    folder: '商業施設',
+    folder: 'commercial',
     description: '商業施設の設計実績'
   },
   office: {
     title: 'オフィスインナー',
-    folder: 'オフィス',
+    folder: 'office',
     description: 'オフィス設計の実績'
   },
   public: {
     title: '公共施設インナー',
-    folder: '公共施設',
+    folder: 'public',
     description: '公共施設の設計実績'
   },
   renovation: {
     title: 'リノベーションインナー',
-    folder: 'リノベーション',
+    folder: 'renovation',
     description: 'リノベーションの実績'
   },
   interior: {
     title: 'インテリアインナー',
-    folder: 'インテリア',
+    folder: 'interior',
     description: 'テストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテスト'
   }
 };
@@ -55,7 +55,7 @@ const worksCategories = {
 // 画像ファイルを取得する関数
 async function getImageFiles(folder) {
   try {
-    const response = await fetch(`images/works/${folder}/`);
+    const response = await fetch(`./images/works/${folder}/`);
     if (!response.ok) {
       console.error(`Error: Could not access images/works/${folder}/ directory`);
       return [];

@@ -1,10 +1,10 @@
 // 画像フォルダのパス
 const imageFolders = {
-  hero: 'images/hero',
-  philosophy: 'images/philosophy',
-  profile: 'images/profile',
-  works: 'images/works',
-  contact: 'images/contact'
+  hero: './images/hero',
+  philosophy: './images/philosophy',
+  profile: './images/profile',
+  works: './images/works',
+  contact: './images/contact'
 };
 
 // 画像ファイルを取得する関数
