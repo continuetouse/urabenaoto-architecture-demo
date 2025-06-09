@@ -1,46 +1,36 @@
 // 画像フォルダのパス
 const imageFolders = {
   hero: window.location.hostname === 'github.io' 
-    ? 'https://raw.githubusercontent.com/continuetouse/urabenaoto-architecture-demo/main/images/hero' 
+    ? '/urabenaoto-architecture-demo/images/hero' 
     : './images/hero',
   philosophy: window.location.hostname === 'github.io' 
-    ? 'https://raw.githubusercontent.com/continuetouse/urabenaoto-architecture-demo/main/images/philosophy' 
+    ? '/urabenaoto-architecture-demo/images/philosophy' 
     : './images/philosophy',
   profile: window.location.hostname === 'github.io' 
-    ? 'https://raw.githubusercontent.com/continuetouse/urabenaoto-architecture-demo/main/images/profile' 
+    ? '/urabenaoto-architecture-demo/images/profile' 
     : './images/profile',
   works: window.location.hostname === 'github.io' 
-    ? 'https://raw.githubusercontent.com/continuetouse/urabenaoto-architecture-demo/main/images/works' 
+    ? '/urabenaoto-architecture-demo/images/works' 
     : './images/works',
   contact: window.location.hostname === 'github.io' 
-    ? 'https://raw.githubusercontent.com/continuetouse/urabenaoto-architecture-demo/main/images/contact' 
+    ? '/urabenaoto-architecture-demo/images/contact' 
     : './images/contact'
 };
 
 // 画像ファイルを取得する関数
 async function getImageFiles(folder) {
   try {
-    // GitHub Pagesの場合は、GitHubのrawファイルURLを使用
-    const isGitHubPages = window.location.hostname === 'github.io';
-    const path = isGitHubPages
-      ? `https://raw.githubusercontent.com/continuetouse/urabenaoto-architecture-demo/main/${folder}`
-      : folder;
-    
-    const response = await fetch(path);
-    if (!response.ok) {
-      console.error(`Error: Could not access ${folder} directory`);
-      return [];
-    }
-    
-    const text = await response.text();
-    const parser = new DOMParser();
-    const html = parser.parseFromString(text, 'text/html');
-    const links = Array.from(html.querySelectorAll('a'))
-      .map(a => a.href)
-      .filter(href => href.match(/\.(jpg|jpeg|png|gif)$/i))
-      .map(href => href.split('/').pop());
-    
-    return links;
+    // 画像ファイルのリストを直接指定
+    const images = {
+      hero: ['0001.jpg', '0002.jpg', '0003.jpg', '0026.jpg'],
+      philosophy: ['0005.jpg', '0006.jpg', '0008.jpg', '0012.jpg', '0013.jpg', '0014.jpg', '0015.jpg', '0016.jpg'],
+      profile: ['0017.jpg', '0018.jpg', '0019.jpg', '0021.jpg', '0022.jpg', '0023.jpg', '0024.jpg', '0025.jpg'],
+      works: ['0027.jpg', '0028.jpg', '0029.jpg', '0030.jpg', '0031.jpg', '0032.jpg'],
+      contact: [] // contactディレクトリには画像ファイルがないため空配列
+    };
+
+    const folderName = folder.split('/').pop();
+    return images[folderName] || [];
   } catch (error) {
     console.error('Error loading images:', error);
     return [];
