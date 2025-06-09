@@ -131,5 +131,8 @@ async function initializeWorks() {
 }
 
 // モジュールとしてエクスポート
+<<<<<<< HEAD
 // 初期化関数をグローバルに公開
 window.initializeWorks = initializeWorks; 
+=======
+
