@@ -1,19 +1,19 @@
 // 画像フォルダのパス
 const imageFolders = {
   hero: window.location.hostname === 'github.io' 
-    ? '/urabenaoto-architecture-demo/images/hero' 
+    ? '/urabenaoto-architecture-demo/urabenaoto-architecture-demo/images/hero' 
     : './images/hero',
   philosophy: window.location.hostname === 'github.io' 
-    ? '/urabenaoto-architecture-demo/images/philosophy' 
+    ? '/urabenaoto-architecture-demo/urabenaoto-architecture-demo/images/philosophy' 
     : './images/philosophy',
   profile: window.location.hostname === 'github.io' 
-    ? '/urabenaoto-architecture-demo/images/profile' 
+    ? '/urabenaoto-architecture-demo/urabenaoto-architecture-demo/images/profile' 
     : './images/profile',
   works: window.location.hostname === 'github.io' 
-    ? '/urabenaoto-architecture-demo/images/works' 
+    ? '/urabenaoto-architecture-demo/urabenaoto-architecture-demo/images/works' 
     : './images/works',
   contact: window.location.hostname === 'github.io' 
-    ? '/urabenaoto-architecture-demo/images/contact' 
+    ? '/urabenaoto-architecture-demo/urabenaoto-architecture-demo/images/contact' 
     : './images/contact'
 };
 
