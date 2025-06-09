@@ -55,8 +55,11 @@ const worksCategories = {
 // 画像ファイルを取得する関数
 async function getImageFiles(folder) {
   try {
-    // シンプルな相対パス
-    const path = `./images/works/${folder}/`;
+    // GitHub PagesのURLエンコーディングを考慮したパス
+    const isGitHubPages = window.location.hostname === 'github.io';
+    const path = isGitHubPages 
+      ? `images/works/${folder}/` 
+      : `./images/works/${folder}/`;
     const response = await fetch(path);
     if (!response.ok) {
       console.error(`Error: Could not access images/works/${folder}/ directory`);
