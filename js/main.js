@@ -1,35 +1,35 @@
 // 画像データのシミュレーション
 const imageData = {
   hero: [
-    './assets/images/hero/architecture1.jpg',
-    './assets/images/hero/architecture2.jpg',
-    './assets/images/hero/architecture3.jpg',
-    './assets/images/hero/architecture4.jpg',
-    './assets/images/hero/architecture5.jpg'
+    '/urabenaoto-architecture-demo/assets/images/hero/architecture1.jpg',
+    '/urabenaoto-architecture-demo/assets/images/hero/architecture2.jpg',
+    '/urabenaoto-architecture-demo/assets/images/hero/architecture3.jpg',
+    '/urabenaoto-architecture-demo/assets/images/hero/architecture4.jpg',
+    '/urabenaoto-architecture-demo/assets/images/hero/architecture5.jpg'
   ],
   philosophy: [
-    './assets/images/philosophy/philosophy1.jpg',
-    './assets/images/philosophy/philosophy2.jpg',
-    './assets/images/philosophy/philosophy3.jpg',
-    './assets/images/philosophy/philosophy4.jpg'
+    '/urabenaoto-architecture-demo/assets/images/philosophy/philosophy1.jpg',
+    '/urabenaoto-architecture-demo/assets/images/philosophy/philosophy2.jpg',
+    '/urabenaoto-architecture-demo/assets/images/philosophy/philosophy3.jpg',
+    '/urabenaoto-architecture-demo/assets/images/philosophy/philosophy4.jpg'
   ],
   profile: [
-    './assets/images/profile/profile1.jpg',
-    './assets/images/profile/profile2.jpg',
-    './assets/images/profile/profile3.jpg'
+    '/urabenaoto-architecture-demo/assets/images/profile/profile1.jpg',
+    '/urabenaoto-architecture-demo/assets/images/profile/profile2.jpg',
+    '/urabenaoto-architecture-demo/assets/images/profile/profile3.jpg'
   ],
   works: [
-    './assets/images/works/works-bg.jpg',
-    './assets/images/works/work1.jpg',
-    './assets/images/works/work2.jpg',
-    './assets/images/works/work3.jpg',
-    './assets/images/works/work4.jpg'
+    '/urabenaoto-architecture-demo/assets/images/works/works-bg.jpg',
+    '/urabenaoto-architecture-demo/assets/images/works/work1.jpg',
+    '/urabenaoto-architecture-demo/assets/images/works/work2.jpg',
+    '/urabenaoto-architecture-demo/assets/images/works/work3.jpg',
+    '/urabenaoto-architecture-demo/assets/images/works/work4.jpg'
   ],
   contact: [
-    './assets/images/contact/contact-bg.jpg',
-    './assets/images/contact/contact1.jpg',
-    './assets/images/contact/contact2.jpg',
-    './assets/images/contact/contact3.jpg'
+    '/urabenaoto-architecture-demo/assets/images/contact/contact-bg.jpg',
+    '/urabenaoto-architecture-demo/assets/images/contact/contact1.jpg',
+    '/urabenaoto-architecture-demo/assets/images/contact/contact2.jpg',
+    '/urabenaoto-architecture-demo/assets/images/contact/contact3.jpg'
   ]
 };
 
