@@ -55,6 +55,12 @@ const worksCategories = {
 // 画像ファイルを取得する関数
 async function getImageFiles(folder) {
   try {
+    // GitHub Pagesの場合はリポジトリ名を含む正しいパスを使用
+    const isGitHubPages = window.location.hostname === 'github.io';
+    const path = isGitHubPages
+      ? `/urabenaoto-architecture-demo/images/works/${folder}`
+      : `./images/works/${folder}`;
+    
     // フォルダ内の画像ファイルを直接指定
     const images = {
       residential: ['0028.jpg'],

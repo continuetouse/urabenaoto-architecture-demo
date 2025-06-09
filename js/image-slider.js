@@ -140,7 +140,11 @@ function initializeWorksSlider() {
   worksImages.forEach(image => {
     const slide = document.createElement('div');
     slide.className = 'works-slide';
-    slide.style.backgroundImage = `url(images/works/${image})`;
+    const isGitHubPages = window.location.hostname === 'github.io';
+    const imagePath = isGitHubPages
+      ? `/urabenaoto-architecture-demo/images/works/${image}`
+      : `./images/works/${image}`;
+    slide.style.backgroundImage = `url(${imagePath})`;
     slider.appendChild(slide);
   });
 
