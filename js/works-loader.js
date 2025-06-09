@@ -85,7 +85,7 @@ function createWorkItem(imagePath, title, description) {
   
   const img = document.createElement('img');
   img.src = window.location.hostname === 'github.io'
-    ? `/urabenaoto-architecture-demo/images/works/${imagePath}`
+    ? `https://github.com/continuetouse/urabenaoto-architecture-demo/blob/main/images/works/${imagePath}`
     : `./images/works/${imagePath}`;
   img.alt = title;
   img.onerror = function() {

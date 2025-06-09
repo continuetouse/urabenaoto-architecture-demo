@@ -20,23 +20,29 @@ const imageFolders = {
 // 画像ファイルを取得する関数
 async function getImageFiles(folder) {
   try {
-    // GitHub Pagesの場合はリポジトリ名を含む正しいパスを使用
-    const path = window.location.hostname === 'github.io'
-      ? `/urabenaoto-architecture-demo/${folder}`
+    // GitHub Pagesの場合は、GitHubのrawファイルURLを使用
+    const isGitHubPages = window.location.hostname === 'github.io';
+    const path = isGitHubPages
+      ? `https://github.com/continuetouse/urabenaoto-architecture-demo/blob/main/${folder}`
       : folder;
     
     const response = await fetch(path);
+    if (!response.ok) {
+      console.error(`Error: Could not access ${folder} directory`);
+      return [];
+    }
+    
     const text = await response.text();
     const parser = new DOMParser();
     const html = parser.parseFromString(text, 'text/html');
-    const links = html.querySelectorAll('a');
-    const imageFiles = Array.from(links)
-      .map(link => link.href)
+    const links = Array.from(html.querySelectorAll('a'))
+      .map(a => a.href)
       .filter(href => href.match(/\.(jpg|jpeg|png|gif)$/i))
       .map(href => href.split('/').pop());
-    return imageFiles;
+    
+    return links;
   } catch (error) {
-    console.error(`Error loading images from ${folder}:`, error);
+    console.error('Error loading images:', error);
     return [];
   }
 }
