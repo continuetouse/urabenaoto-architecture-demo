@@ -84,7 +84,7 @@ function createWorkItem(imagePath, title, description) {
   workItem.className = 'work-item';
   
   const img = document.createElement('img');
-  img.src = `images/works/${imagePath}`;
+  img.src = `./images/works/${imagePath}`;
   img.alt = title;
   img.onerror = function() {
     console.error(`Error loading image: ${this.src}`);

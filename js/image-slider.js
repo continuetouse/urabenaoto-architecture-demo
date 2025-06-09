@@ -38,37 +38,36 @@ const getBasePath = () => {
 
 // 画像データを直接指定
 function loadImageData() {
-  const basePath = getBasePath();
   return {
     hero: [
-      `${basePath}images/hero/0001.jpg`,
-      `${basePath}images/hero/0002.jpg`,
-      `${basePath}images/hero/0003.jpg`,
-      `${basePath}images/hero/0026.jpg`
+      './images/hero/0001.jpg',
+      './images/hero/0002.jpg',
+      './images/hero/0003.jpg',
+      './images/hero/0026.jpg'
     ],
     philosophy: [
-      `${basePath}images/philosophy/0005.jpg`,
-      `${basePath}images/philosophy/0006.jpg`,
-      `${basePath}images/philosophy/0008.jpg`,
-      `${basePath}images/philosophy/0012.jpg`
+      './images/philosophy/0005.jpg',
+      './images/philosophy/0006.jpg',
+      './images/philosophy/0008.jpg',
+      './images/philosophy/0012.jpg'
     ],
     profile: [
-      `${basePath}images/profile/0017.jpg`,
-      `${basePath}images/profile/0018.jpg`,
-      `${basePath}images/profile/0019.jpg`
+      './images/profile/0017.jpg',
+      './images/profile/0018.jpg',
+      './images/profile/0019.jpg'
     ],
     works: [
-      `${basePath}images/works/0020.jpg`,
-      `${basePath}images/works/0021.jpg`,
-      `${basePath}images/works/0022.jpg`,
-      `${basePath}images/works/0023.jpg`,
-      `${basePath}images/works/0024.jpg`
+      './images/works/0020.jpg',
+      './images/works/0021.jpg',
+      './images/works/0022.jpg',
+      './images/works/0023.jpg',
+      './images/works/0024.jpg'
     ],
     contact: [
-      `${basePath}images/contact/0025.jpg`,
-      `${basePath}images/contact/0027.jpg`,
-      `${basePath}images/contact/0028.jpg`,
-      `${basePath}images/contact/0029.jpg`
+      './images/contact/0025.jpg',
+      './images/contact/0027.jpg',
+      './images/contact/0028.jpg',
+      './images/contact/0029.jpg'
     ]
   };
 }
