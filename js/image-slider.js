@@ -46,7 +46,13 @@ async function loadImageData() {
   const imageData = {};
   for (const [section, folder] of Object.entries(imageFolders)) {
     const files = await getImageFiles(folder);
-    imageData[section] = files.map(file => `${folder}/${file}`);
+    imageData[section] = files.map(file => {
+      const isGitHubPages = window.location.hostname === 'github.io';
+      const path = isGitHubPages 
+        ? `/urabenaoto-architecture-demo/${folder}/${file}`
+        : `./${folder}/${file}`;
+      return path;
+    });
   }
   return imageData;
 }
