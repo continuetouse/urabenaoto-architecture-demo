@@ -23,7 +23,7 @@ async function getImageFiles(folder) {
     // GitHub Pagesの場合は、GitHubのrawファイルURLを使用
     const isGitHubPages = window.location.hostname === 'github.io';
     const path = isGitHubPages
-      ? `https://github.com/continuetouse/urabenaoto-architecture-demo/blob/main/${folder}`
+      ? `https://raw.githubusercontent.com/continuetouse/urabenaoto-architecture-demo/main/${folder}`
       : folder;
     
     const response = await fetch(path);
