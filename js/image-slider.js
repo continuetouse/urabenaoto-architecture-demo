@@ -26,14 +26,51 @@ async function getImageFiles(folder) {
   }
 }
 
-// 画像データを動的に取得
-async function loadImageData() {
-  const imageData = {};
-  for (const [section, folder] of Object.entries(imageFolders)) {
-    const files = await getImageFiles(folder);
-    imageData[section] = files.map(file => `${folder}/${file}`);
+// 環境に応じたベースパスを取得
+const getBasePath = () => {
+  // ローカル環境の場合
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    return './';
   }
-  return imageData;
+  // GitHub Pagesの場合
+  return '/urabenaoto-architecture-demo/';
+};
+
+// 画像データを直接指定
+function loadImageData() {
+  const basePath = getBasePath();
+  return {
+    hero: [
+      `${basePath}images/hero/0001.jpg`,
+      `${basePath}images/hero/0002.jpg`,
+      `${basePath}images/hero/0003.jpg`,
+      `${basePath}images/hero/0026.jpg`
+    ],
+    philosophy: [
+      `${basePath}images/philosophy/0005.jpg`,
+      `${basePath}images/philosophy/0006.jpg`,
+      `${basePath}images/philosophy/0008.jpg`,
+      `${basePath}images/philosophy/0012.jpg`
+    ],
+    profile: [
+      `${basePath}images/profile/0017.jpg`,
+      `${basePath}images/profile/0018.jpg`,
+      `${basePath}images/profile/0019.jpg`
+    ],
+    works: [
+      `${basePath}images/works/0020.jpg`,
+      `${basePath}images/works/0021.jpg`,
+      `${basePath}images/works/0022.jpg`,
+      `${basePath}images/works/0023.jpg`,
+      `${basePath}images/works/0024.jpg`
+    ],
+    contact: [
+      `${basePath}images/contact/0025.jpg`,
+      `${basePath}images/contact/0027.jpg`,
+      `${basePath}images/contact/0028.jpg`,
+      `${basePath}images/contact/0029.jpg`
+    ]
+  };
 }
 
 // 配列をランダムに並び替える関数
