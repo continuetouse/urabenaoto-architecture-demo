@@ -1,10 +1,20 @@
 // 画像フォルダのパス
 const imageFolders = {
-  hero: 'images/hero',
-  philosophy: 'images/philosophy',
-  profile: 'images/profile',
-  works: 'images/works',
-  contact: 'images/contact'
+  hero: window.location.hostname === 'github.io' 
+    ? '/urabenaoto-architecture-demo/images/hero' 
+    : './images/hero',
+  philosophy: window.location.hostname === 'github.io' 
+    ? '/urabenaoto-architecture-demo/images/philosophy' 
+    : './images/philosophy',
+  profile: window.location.hostname === 'github.io' 
+    ? '/urabenaoto-architecture-demo/images/profile' 
+    : './images/profile',
+  works: window.location.hostname === 'github.io' 
+    ? '/urabenaoto-architecture-demo/images/works' 
+    : './images/works',
+  contact: window.location.hostname === 'github.io' 
+    ? '/urabenaoto-architecture-demo/images/contact' 
+    : './images/contact'
 };
 
 // 画像ファイルを取得する関数

@@ -55,10 +55,9 @@ const worksCategories = {
 // 画像ファイルを取得する関数
 async function getImageFiles(folder) {
   try {
-    // GitHub PagesのURLエンコーディングを考慮したパス
-    const isGitHubPages = window.location.hostname === 'github.io';
-    const path = isGitHubPages 
-      ? `images/works/${folder}/` 
+    // 環境に応じたパス設定
+    const path = window.location.hostname === 'github.io'
+      ? `/urabenaoto-architecture-demo/images/works/${folder}/`
       : `./images/works/${folder}/`;
     const response = await fetch(path);
     if (!response.ok) {
