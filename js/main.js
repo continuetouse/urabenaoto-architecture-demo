@@ -33,59 +33,52 @@ const imageData = {
   ]
 };
 
-// ページ読み込み完了時の処理
-document.addEventListener('DOMContentLoaded', () => {
-  // スライダーの初期化
-  import('./image-slider.js').then(module => {
-    module.initializeSliders();
-    module.initializeWorksSlider();
-  });
-  
-  // 作品セクションの初期化
-  import('./works-loader.js').then(module => {
-    module.initializeWorks();
-  });
-  
-  // ナビゲーションバーのスクロール効果
+// 定数定義
+const SCROLL_THRESHOLD = 50;
+const ANIMATION_OFFSET = 100;
+
+// ナビゲーションバーのスクロール効果
+function handleNavbarScroll() {
   const navbar = document.getElementById('navbar');
+  if (!navbar) return;
+
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
+    navbar.classList.toggle('scrolled', window.scrollY > SCROLL_THRESHOLD);
   });
-  
-  // セクションのスクロールアニメーション
+}
+
+// セクションのスクロールアニメーション
+function handleScrollAnimation() {
+  const elements = [
+    document.querySelector('.philosophy-content'),
+    document.querySelector('.profile-content'),
+    document.querySelector('.contact-form'),
+    ...document.querySelectorAll('.work-item')
+  ].filter(Boolean);
+
   const animateOnScroll = () => {
-    const elements = [
-      document.querySelector('.philosophy-content'),
-      document.querySelector('.profile-content'),
-      document.querySelector('.contact-form'),
-      ...document.querySelectorAll('.work-item')
-    ];
-    
     elements.forEach(el => {
       const elementTop = el.getBoundingClientRect().top;
       const elementBottom = el.getBoundingClientRect().bottom;
-      const isVisible = (elementTop < window.innerHeight - 100) && (elementBottom > 0);
+      const isVisible = (elementTop < window.innerHeight - ANIMATION_OFFSET) && (elementBottom > 0);
       
-      if (isVisible) {
-        el.classList.add('animate');
-      }
+      el.classList.toggle('animate', isVisible);
     });
   };
   
   animateOnScroll();
   window.addEventListener('scroll', animateOnScroll);
-  
-  // ナビゲーションリンクのスムーズスクロール
+}
+
+// ナビゲーションリンクのスムーズスクロール
+function handleSmoothScroll() {
   document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
       
       const targetId = this.getAttribute('href');
       const targetSection = document.querySelector(targetId);
+      if (!targetSection) return;
       
       window.scrollTo({
         top: targetSection.offsetTop - 70,
@@ -93,60 +86,61 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
-  
-  // フォームのバリデーション
+}
+
+// フォームのバリデーション
+function handleFormValidation() {
   const contactForm = document.querySelector('.contact-form');
-  
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      let isValid = true;
-      const requiredFields = contactForm.querySelectorAll('[required]');
-      
-      requiredFields.forEach(field => {
-        if (!field.value.trim()) {
-          isValid = false;
-          field.classList.add('error');
-          
-          const errorMsg = field.nextElementSibling;
-          if (errorMsg && errorMsg.classList.contains('error-message')) {
-            errorMsg.style.display = 'block';
-          }
-        } else {
-          field.classList.remove('error');
-          
-          const errorMsg = field.nextElementSibling;
-          if (errorMsg && errorMsg.classList.contains('error-message')) {
-            errorMsg.style.display = 'none';
-          }
-        }
-      });
-      
-      const emailField = contactForm.querySelector('input[type="email"]');
-      if (emailField && emailField.value) {
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(emailField.value)) {
-          isValid = false;
-          emailField.classList.add('error');
-          
-          const errorMsg = emailField.nextElementSibling;
-          if (errorMsg && errorMsg.classList.contains('error-message')) {
-            errorMsg.style.display = 'block';
-          }
-        }
-      }
-      
-      if (isValid) {
-        const successMessage = document.createElement('div');
-        successMessage.className = 'success-message';
-        successMessage.textContent = document.documentElement.lang === 'ja' ? 
-          'お問い合わせありがとうございます。近日中にご連絡いたします。' : 
-          'Thank you for your inquiry. We will contact you soon.';
-        
-        contactForm.innerHTML = '';
-        contactForm.appendChild(successMessage);
+  if (!contactForm) return;
+
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const formObject = Object.fromEntries(formData.entries());
+    
+    // バリデーション
+    let isValid = true;
+    const requiredFields = ['name', 'email', 'message'];
+    
+    requiredFields.forEach(field => {
+      const input = this.querySelector(`[name="${field}"]`);
+      if (!input || !input.value.trim()) {
+        isValid = false;
+        input.classList.add('error');
+        input.nextElementSibling.style.display = 'block';
+      } else {
+        input.classList.remove('error');
+        input.nextElementSibling.style.display = 'none';
       }
     });
+    
+    if (isValid) {
+      // フォーム送信処理
+      console.log('Form submitted:', formObject);
+      this.reset();
+      this.innerHTML = '<div class="success-message">メッセージを送信しました。ありがとうございます。</div>';
+    }
+  });
+}
+
+// ページ読み込み完了時の処理
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    // スライダーの初期化
+    const sliderModule = await import('./image-slider.js');
+    await sliderModule.initializeSliders();
+    
+    // 作品セクションの初期化
+    const worksModule = await import('./works-loader.js');
+    await worksModule.initializeWorks();
+    
+    // その他の機能の初期化
+    handleNavbarScroll();
+    handleScrollAnimation();
+    handleSmoothScroll();
+    handleFormValidation();
+  } catch (error) {
+    console.error('Error initializing page:', error);
   }
 });

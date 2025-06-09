@@ -1,92 +1,64 @@
-// 作品データ
-const worksData = [
-  {
-    title: "コンクリートとガラスの対話 / Concrete & Glass",
-    description: "素材の対比を活かした現代的な空間デザイン"
-  },
-  {
-    title: "中庭のある住まい / Courtyard House",
-    description: "自然光を取り込んだ開放的な住空間"
-  },
-  {
-    title: "都市のオアシス / Urban Oasis",
-    description: "都会の中の癒しの空間"
-  },
-  {
-    title: "光と影の調和 / Light & Shadow",
-    description: "自然光を活かした空間演出"
-  }
-];
+// 定数定義
+const IMAGE_BASE_PATH = window.location.hostname === 'github.io'
+  ? 'https://continuetouse.github.io/urabenaoto-architecture-demo/images/works'
+  : './images/works';
 
-// 作品カテゴリーのデータ
-const worksCategories = {
+// 作品データ
+const WORKS_DATA = {
   residential: {
     title: '住宅インナー',
-    folder: 'residential',
-    description: '住宅設計の実績'
+    description: '住宅設計の実績',
+    images: ['0028.jpg']
   },
   commercial: {
     title: '商業施設インナー',
-    folder: 'commercial',
-    description: '商業施設の設計実績'
+    description: '商業施設の設計実績',
+    images: ['0027.jpg', '0029.jpg']
   },
   office: {
     title: 'オフィスインナー',
-    folder: 'office',
-    description: 'オフィス設計の実績'
+    description: 'オフィス設計の実績',
+    images: ['0030.jpg']
   },
   public: {
     title: '公共施設インナー',
-    folder: 'public',
-    description: '公共施設の設計実績'
+    description: '公共施設の設計実績',
+    images: ['0031.jpg']
   },
   renovation: {
     title: 'リノベーションインナー',
-    folder: 'renovation',
-    description: 'リノベーションの実績'
+    description: 'リノベーションの実績',
+    images: ['0032.jpg']
   },
   interior: {
     title: 'インテリアインナー',
-    folder: 'interior',
-    description: 'テストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテスト'
+    description: 'インテリア設計の実績',
+    images: []
   }
 };
 
-// 画像ファイルを取得する関数
-async function getImageFiles(folder) {
-  try {
-    // GitHub Pagesの場合はリポジトリ名を含む正しいパスを使用
-    const isGitHubPages = window.location.hostname === 'github.io';
-    const path = isGitHubPages
-      ? `/urabenaoto-architecture-demo/images/works/${folder}`
-      : `./images/works/${folder}`;
-    
-    // フォルダ内の画像ファイルを直接指定
-    const images = {
-      residential: ['0028.jpg'],
-      commercial: ['0027.jpg', '0029.jpg'],
-      office: ['0030.jpg'],
-      public: ['0031.jpg'],
-      renovation: ['0032.jpg'],
-      interior: []
-    };
-    
-    return images[folder] || [];
-  } catch (error) {
-    console.error('Error loading images:', error);
-    return [];
-  }
+/**
+ * 画像のパスを取得する
+ * @param {string} imageName - 画像ファイル名
+ * @returns {string} 画像の完全なパス
+ */
+function getImagePath(imageName) {
+  return `${IMAGE_BASE_PATH}/${imageName}`;
 }
 
-// 作品アイテムを作成する関数
+/**
+ * 作品アイテムを作成する
+ * @param {string} imagePath - 画像のパス
+ * @param {string} title - 作品のタイトル
+ * @param {string} description - 作品の説明
+ * @returns {HTMLElement} 作品アイテムの要素
+ */
 function createWorkItem(imagePath, title, description) {
   const workItem = document.createElement('div');
   workItem.className = 'work-item';
   
   const img = document.createElement('img');
-  img.src = window.location.hostname === 'github.io'
-    ? `https://github.com/continuetouse/urabenaoto-architecture-demo/blob/main/images/works/${imagePath}`
-    : `./images/works/${imagePath}`;
+  img.src = imagePath;
   img.alt = title;
   img.onerror = function() {
     console.error(`Error loading image: ${this.src}`);
@@ -112,23 +84,28 @@ function createWorkItem(imagePath, title, description) {
   return workItem;
 }
 
-// 作品セクションを初期化する関数
+/**
+ * 作品セクションを初期化する
+ */
 async function initializeWorks() {
-  for (const [category, data] of Object.entries(worksCategories)) {
-    const container = document.getElementById(`${category}-works`);
-    if (!container) continue;
-    
-    const images = await getImageFiles(data.folder);
-    container.innerHTML = '';
-    
-    images.forEach((image, index) => {
-      const workItem = createWorkItem(
-        `${image}`,
-        `${data.title}`,
-        data.description
-      );
-      container.appendChild(workItem);
-    });
+  try {
+    for (const [category, data] of Object.entries(WORKS_DATA)) {
+      const container = document.getElementById(`${category}-works`);
+      if (!container) continue;
+      
+      container.innerHTML = '';
+      
+      data.images.forEach(image => {
+        const workItem = createWorkItem(
+          getImagePath(image),
+          data.title,
+          data.description
+        );
+        container.appendChild(workItem);
+      });
+    }
+  } catch (error) {
+    console.error('Error initializing works:', error);
   }
 }
 

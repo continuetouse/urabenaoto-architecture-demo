@@ -1,56 +1,32 @@
-// 画像フォルダのパス
-const imageFolders = {
-  hero: './images/hero',
-  philosophy: './images/philosophy',
-  profile: './images/profile',
-  works: './images/works',
-  contact: './images/contact'
+// 定数定義
+const SLIDER_INTERVAL = 5000; // スライド切り替えの間隔（ミリ秒）
+
+// 画像ファイルの設定
+const IMAGE_CONFIG = {
+  hero: {
+    files: ['0001.jpg', '0002.jpg', '0003.jpg', '0026.jpg'],
+    path: './images/hero'
+  },
+  philosophy: {
+    files: ['0005.jpg', '0006.jpg', '0008.jpg', '0012.jpg', '0013.jpg', '0014.jpg', '0015.jpg', '0016.jpg'],
+    path: './images/philosophy'
+  },
+  profile: {
+    files: ['0017.jpg', '0018.jpg', '0019.jpg', '0021.jpg', '0022.jpg', '0023.jpg', '0024.jpg', '0025.jpg'],
+    path: './images/profile'
+  },
+  works: {
+    files: ['0027.jpg', '0028.jpg', '0029.jpg', '0030.jpg', '0031.jpg', '0032.jpg'],
+    path: './images/works'
+  },
+  contact: {
+    files: [],
+    path: './images/contact'
+  }
 };
 
-// 画像ファイルを取得する関数
-async function getImageFiles(folder) {
-  try {
-    // 画像ファイルのリストを直接指定
-    const images = {
-      hero: ['0001.jpg', '0002.jpg', '0003.jpg', '0026.jpg'],
-      philosophy: ['0005.jpg', '0006.jpg', '0008.jpg', '0012.jpg', '0013.jpg', '0014.jpg', '0015.jpg', '0016.jpg'],
-      profile: ['0017.jpg', '0018.jpg', '0019.jpg', '0021.jpg', '0022.jpg', '0023.jpg', '0024.jpg', '0025.jpg'],
-      works: ['0027.jpg', '0028.jpg', '0029.jpg', '0030.jpg', '0031.jpg', '0032.jpg'],
-      contact: [] // contactディレクトリには画像ファイルがないため空配列
-    };
-
-    const folderName = folder.split('/').pop();
-    return images[folderName] || [];
-  } catch (error) {
-    console.error('Error loading images:', error);
-    return [];
-  }
-}
-
-// 画像データを動的に取得
-async function loadImageData() {
-  const imageData = {};
-  for (const [section, folder] of Object.entries(imageFolders)) {
-    const files = await getImageFiles(folder);
-    imageData[section] = files.map(file => {
-      // 相対パスを使用（GitHub Pagesとローカル環境の両方で動作）
-      return `${folder}/${file}`;
-    });
-  }
-  return imageData;
-}
-
-// 配列をランダムに並び替える関数
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
 // 各セクションの前回アクティブなスライドのインデックスを追跡
-const prevActiveIndex = {
+const activeSlideIndex = {
   hero: 0,
   philosophy: 0,
   profile: 0,
@@ -58,11 +34,50 @@ const prevActiveIndex = {
   contact: 0
 };
 
-// スライダーの初期化
+/**
+ * 画像ファイルのパスを取得する
+ * @param {string} section - セクション名
+ * @param {string} file - ファイル名
+ * @returns {string} 画像の完全なパス
+ */
+function getImagePath(section, file) {
+  return `${IMAGE_CONFIG[section].path}/${file}`;
+}
+
+/**
+ * 画像ファイルのリストを取得する
+ * @param {string} section - セクション名
+ * @returns {string[]} 画像ファイルのリスト
+ */
+async function getImageFiles(section) {
+  try {
+    return IMAGE_CONFIG[section]?.files || [];
+  } catch (error) {
+    console.error(`Error loading images for ${section}:`, error);
+    return [];
+  }
+}
+
+/**
+ * 配列をランダムに並び替える
+ * @param {Array} array - 並び替える配列
+ * @returns {Array} ランダムに並び替えられた配列
+ */
+function shuffleArray(array) {
+  return [...array].sort(() => Math.random() - 0.5);
+}
+
+/**
+ * スライダーを初期化する
+ * @param {string} sectionId - セクションID
+ * @param {string[]} imageArray - 画像ファイルの配列
+ */
 function initSlider(sectionId, imageArray) {
   const sliderContainer = document.querySelector(`.${sectionId}-slider`);
+  if (!sliderContainer) return;
+
   sliderContainer.innerHTML = '';
-  const shuffledImages = shuffleArray([...imageArray]);
+  const shuffledImages = shuffleArray(imageArray);
   
   shuffledImages.forEach((imgSrc, index) => {
     const slide = document.createElement('div');
@@ -79,23 +94,43 @@ function initSlider(sectionId, imageArray) {
   startSlider(sectionId, shuffledImages.length);
 }
 
-// スライダー開始関数
+/**
+ * スライダーを開始する
+ * @param {string} sectionId - セクションID
+ * @param {number} slideCount - スライドの総数
+ */
 function startSlider(sectionId, slideCount) {
   setInterval(() => {
     const slides = document.querySelectorAll(`.${sectionId}-slide`);
-    slides[prevActiveIndex[sectionId]].classList.remove('active');
+    if (!slides.length) return;
+
+    slides[activeSlideIndex[sectionId]].classList.remove('active');
     
     let nextIndex;
     do {
       nextIndex = Math.floor(Math.random() * slideCount);
-    } while (nextIndex === prevActiveIndex[sectionId]);
+    } while (nextIndex === activeSlideIndex[sectionId] && slideCount > 1);
     
-    prevActiveIndex[sectionId] = nextIndex;
+    activeSlideIndex[sectionId] = nextIndex;
     slides[nextIndex].classList.add('active');
-  }, 5000);
+  }, SLIDER_INTERVAL);
 }
 
-// 初期化関数
+/**
+ * 画像データを動的に取得する
+ * @returns {Promise<Object>} セクションごとの画像データ
+ */
+async function loadImageData() {
+  const imageData = {};
+  for (const [section, config] of Object.entries(IMAGE_CONFIG)) {
+    imageData[section] = config.files.map(file => getImagePath(section, file));
+  }
+  return imageData;
+}
+
+/**
+ * スライダーを初期化する
+ */
 async function initializeSliders() {
   const imageData = await loadImageData();
   for (const [section, images] of Object.entries(imageData)) {
@@ -105,46 +140,5 @@ async function initializeSliders() {
   }
 }
 
-// 背景画像のスライドショー
-const worksImages = [
-  '0027.jpg',
-  '0028.jpg',
-  '0029.jpg',
-  '0030.jpg',
-  '0031.jpg',
-  '0032.jpg'
-];
-
-function initializeWorksSlider() {
-  const slider = document.querySelector('.works-slider');
-  if (!slider) return;
-
-  // スライド要素を作成
-  worksImages.forEach(image => {
-    const slide = document.createElement('div');
-    slide.className = 'works-slide';
-    const isGitHubPages = window.location.hostname === 'github.io';
-    const imagePath = isGitHubPages
-      ? `https://raw.githubusercontent.com/continuetouse/urabenaoto-architecture-demo/main/images/works/${image}`
-      : `./images/works/${image}`;
-    slide.style.backgroundImage = `url(${imagePath})`;
-    slider.appendChild(slide);
-  });
-
-  // 最初のスライドを表示
-  const slides = document.querySelectorAll('.works-slide');
-  if (slides.length > 0) {
-    slides[0].classList.add('active');
-  }
-
-  // スライド切り替え
-  let currentSlide = 0;
-  setInterval(() => {
-    slides[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add('active');
-  }, 5000);
-}
-
 // モジュールとしてエクスポート
-export { initializeSliders, initializeWorksSlider };
+export { initializeSliders };
