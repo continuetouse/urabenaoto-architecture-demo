@@ -138,6 +138,8 @@ function initializeWorksSlider() {
   }, 5000);
 }
 
-// グローバル関数として定義
-window.initializeSliders = initializeSliders;
-window.initializeWorksSlider = initializeWorksSlider;
+// ページ読み込み時にスライダーを初期化
+document.addEventListener('DOMContentLoaded', async () => {
+  await initializeSliders();
+  initializeWorksSlider();
+});

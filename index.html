@@ -40,8 +40,8 @@
 
   <!-- Hero Section -->
   <section id="hero" class="hero">
-    <div class="hero-image">
-      <img src="images/hero/0027.jpg" alt="Hero Image">
+    <div class="hero-slider">
+      <!-- Hero slides will be dynamically added here -->
     </div>
     <div class="hero-content">
       <h1 data-translate="hero.title">占部直人建築設計事務所</h1>
@@ -52,8 +52,8 @@
 
   <!-- Philosophy Section -->
   <section id="philosophy" class="philosophy">
-    <div class="philosophy-image">
-      <img src="images/philosophy/0028.jpg" alt="Philosophy Image">
+    <div class="philosophy-slider">
+      <!-- Philosophy slides will be dynamically added here -->
     </div>
     <div class="container">
       <div class="philosophy-content">
@@ -67,8 +67,8 @@
 
   <!-- Profile Section -->
   <section id="profile" class="profile">
-    <div class="profile-image">
-      <img src="images/profile/0029.jpg" alt="Profile Image">
+    <div class="profile-slider">
+      <!-- Profile slides will be dynamically added here -->
     </div>
     <div class="container">
       <div class="profile-content">
@@ -87,8 +87,8 @@
 
   <!-- Works Section -->
   <section id="works" class="works">
-    <div class="works-image">
-      <img src="images/works/0030.jpg" alt="Works Image">
+    <div class="works-slider">
+      <!-- Works slides will be dynamically added here -->
     </div>
     <div class="container">
       <div class="works-content">
@@ -96,74 +96,38 @@
         <div class="works-grid">
           <div class="works-corner residential">
             <h3 data-translate="works.residential">住宅</h3>
-            <div class="works-items">
-              <div class="work-item">
-                <img src="images/works/住宅/0028.jpg" alt="住宅作品">
-                <div class="work-overlay">
-                  <h3>住宅設計</h3>
-                  <p>住宅設計の実績</p>
-                </div>
-              </div>
+            <div class="works-items" id="residential-works">
+              <!-- Residential works will be dynamically added here -->
             </div>
           </div>
           <div class="works-corner commercial">
             <h3 data-translate="works.commercial">商業施設</h3>
-            <div class="works-items">
-              <div class="work-item">
-                <img src="images/works/商業施設/0026.jpg" alt="商業施設作品">
-                <div class="work-overlay">
-                  <h3>商業施設設計</h3>
-                  <p>商業施設の設計実績</p>
-                </div>
-              </div>
+            <div class="works-items" id="commercial-works">
+              <!-- Commercial works will be dynamically added here -->
             </div>
           </div>
           <div class="works-corner office">
             <h3 data-translate="works.office">オフィス</h3>
-            <div class="works-items">
-              <div class="work-item">
-                <img src="images/works/0027.jpg" alt="オフィス作品">
-                <div class="work-overlay">
-                  <h3>オフィス設計</h3>
-                  <p>オフィス設計の実績</p>
-                </div>
-              </div>
+            <div class="works-items" id="office-works">
+              <!-- Office works will be dynamically added here -->
             </div>
           </div>
           <div class="works-corner public">
             <h3 data-translate="works.public">公共施設</h3>
-            <div class="works-items">
-              <div class="work-item">
-                <img src="images/works/0030.jpg" alt="公共施設作品">
-                <div class="work-overlay">
-                  <h3>公共施設設計</h3>
-                  <p>公共施設の設計実績</p>
-                </div>
-              </div>
+            <div class="works-items" id="public-works">
+              <!-- Public works will be dynamically added here -->
             </div>
           </div>
           <div class="works-corner renovation">
             <h3 data-translate="works.renovation">リノベーション</h3>
-            <div class="works-items">
-              <div class="work-item">
-                <img src="images/works/0027.jpg" alt="リノベーション作品">
-                <div class="work-overlay">
-                  <h3>リノベーション</h3>
-                  <p>リノベーションの実績</p>
-                </div>
-              </div>
+            <div class="works-items" id="renovation-works">
+              <!-- Renovation works will be dynamically added here -->
             </div>
           </div>
           <div class="works-corner interior">
             <h3 data-translate="works.interior">インテリア</h3>
-            <div class="works-items">
-              <div class="work-item">
-                <img src="images/works/0030.jpg" alt="インテリア作品">
-                <div class="work-overlay">
-                  <h3>インテリア設計</h3>
-                  <p>インテリア設計の実績</p>
-                </div>
-              </div>
+            <div class="works-items" id="interior-works">
+              <!-- Interior works will be dynamically added here -->
             </div>
           </div>
         </div>
@@ -183,8 +147,8 @@
 
   <!-- Contact Section -->
   <section id="contact" class="contact">
-    <div class="contact-image">
-      <img src="images/contact/0031.jpg" alt="Contact Image">
+    <div class="contact-slider">
+      <!-- Contact slides will be dynamically added here -->
     </div>
     <div class="container">
       <div class="contact-content">
@@ -233,7 +197,10 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script type="module" src="js/main.js"></script>
   <script src="js/language-switcher.js"></script>
+  <script src="js/image-slider.js"></script>
+  <script src="js/works-loader.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

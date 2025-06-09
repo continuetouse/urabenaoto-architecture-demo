@@ -18,65 +18,65 @@ const worksData = [
   }
 ];
 
-// 作品カテゴリーのデータと画像
+// 作品カテゴリーのデータ
 const worksCategories = {
   residential: {
     title: '住宅インナー',
     folder: '住宅',
-    description: '住宅設計の実績',
-    images: [
-      'images/works/住宅/0028.jpg'
-    ]
+    description: '住宅設計の実績'
   },
   commercial: {
     title: '商業施設インナー',
     folder: '商業施設',
-    description: '商業施設の設計実績',
-    images: [
-      'images/works/商業施設/0026.jpg'
-    ]
+    description: '商業施設の設計実績'
   },
   office: {
     title: 'オフィスインナー',
     folder: 'オフィス',
-    description: 'オフィス設計の実績',
-    images: [
-      'images/works/0027.jpg',
-      'images/works/0028.jpg',
-      'images/works/0029.jpg'
-    ]
+    description: 'オフィス設計の実績'
   },
   public: {
     title: '公共施設インナー',
     folder: '公共施設',
-    description: '公共施設の設計実績',
-    images: [
-      'images/works/0030.jpg',
-      'images/works/0031.jpg',
-      'images/works/0032.jpg'
-    ]
+    description: '公共施設の設計実績'
   },
   renovation: {
     title: 'リノベーションインナー',
     folder: 'リノベーション',
-    description: 'リノベーションの実績',
-    images: [
-      'images/works/0027.jpg',
-      'images/works/0028.jpg',
-      'images/works/0029.jpg'
-    ]
+    description: 'リノベーションの実績'
   },
   interior: {
     title: 'インテリアインナー',
     folder: 'インテリア',
-    description: 'インテリア設計の実績',
-    images: [
-      'images/works/0030.jpg',
-      'images/works/0031.jpg',
-      'images/works/0032.jpg'
-    ]
+    description: 'テストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテスト'
   }
 };
+
+// 画像ファイルを取得する関数
+async function getImageFiles(folder) {
+  try {
+    const response = await fetch(`images/works/${folder}/`);
+    if (!response.ok) {
+      console.error(`Error: Could not access images/works/${folder}/ directory`);
+      return [];
+    }
+    const text = await response.text();
+    const parser = new DOMParser();
+    const html = parser.parseFromString(text, 'text/html');
+    const links = Array.from(html.querySelectorAll('a'))
+      .map(a => a.href)
+      .filter(href => {
+        const ext = href.split('.').pop().toLowerCase();
+        return ['jpg', 'jpeg', 'png', 'gif'].includes(ext);
+      })
+      .map(href => href.split('/').pop());
+    console.log(`Found ${links.length} images in ${folder} folder`);
+    return links;
+  } catch (error) {
+    console.error('Error loading images:', error);
+    return [];
+  }
+}
 
 // 作品アイテムを作成する関数
 function createWorkItem(imagePath, title, description) {
@@ -84,7 +84,7 @@ function createWorkItem(imagePath, title, description) {
   workItem.className = 'work-item';
   
   const img = document.createElement('img');
-  img.src = imagePath;
+  img.src = `images/works/${imagePath}`;
   img.alt = title;
   img.onerror = function() {
     console.error(`Error loading image: ${this.src}`);
@@ -111,16 +111,17 @@ function createWorkItem(imagePath, title, description) {
 }
 
 // 作品セクションを初期化する関数
-function initializeWorks() {
+async function initializeWorks() {
   for (const [category, data] of Object.entries(worksCategories)) {
     const container = document.getElementById(`${category}-works`);
     if (!container) continue;
     
+    const images = await getImageFiles(data.folder);
     container.innerHTML = '';
     
-    data.images.forEach((imagePath, index) => {
+    images.forEach((image, index) => {
       const workItem = createWorkItem(
-        imagePath,
+        `${data.folder}/${image}`,
         `${data.title}`,
         data.description
       );
@@ -129,5 +130,5 @@ function initializeWorks() {
   }
 }
 
-// グローバル関数として定義
-window.initializeWorks = initializeWorks; 
+// モジュールとしてエクスポート
+export { initializeWorks }; 
