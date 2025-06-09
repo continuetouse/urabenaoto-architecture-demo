@@ -8,42 +8,42 @@ const WORKS_DATA = {
   residential: {
     title: '住宅インナー',
     description: '住宅設計の実績',
-    images: ['0028.jpg']
+    images: ['residential/0028.jpg']
   },
   commercial: {
     title: '商業施設インナー',
     description: '商業施設の設計実績',
-    images: ['0027.jpg', '0029.jpg']
+    images: ['commercial/0026.jpg']
   },
   office: {
     title: 'オフィスインナー',
     description: 'オフィス設計の実績',
-    images: ['0030.jpg']
+    images: ['office/0002.jpg']
   },
   public: {
     title: '公共施設インナー',
     description: '公共施設の設計実績',
-    images: ['0031.jpg']
+    images: ['public/0001.jpg']
   },
   renovation: {
     title: 'リノベーションインナー',
     description: 'リノベーションの実績',
-    images: ['0032.jpg']
+    images: ['renovation/0029.jpg']
   },
   interior: {
     title: 'インテリアインナー',
     description: 'インテリア設計の実績',
-    images: []
+    images: ['interior/0007.jpg']
   }
 };
 
 /**
  * 画像のパスを取得する
- * @param {string} imageName - 画像ファイル名
+ * @param {string} imagePath - 画像の相対パス（カテゴリーフォルダを含む）
  * @returns {string} 画像の完全なパス
  */
-function getImagePath(imageName) {
-  return `${IMAGE_BASE_PATH}/${imageName}`;
+function getImagePath(imagePath) {
+  return `${IMAGE_BASE_PATH}/${imagePath}`;
 }
 
 /**
