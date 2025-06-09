@@ -1,48 +1,14 @@
-// 画像データのシミュレーション
-const imageData = {
-  hero: [
-    '/urabenaoto-architecture-demo/images/hero/0001.jpg',
-    '/urabenaoto-architecture-demo/images/hero/0002.jpg',
-    '/urabenaoto-architecture-demo/images/hero/0003.jpg',
-    '/urabenaoto-architecture-demo/images/hero/0026.jpg'
-  ],
-  philosophy: [
-    '/urabenaoto-architecture-demo/images/philosophy/0005.jpg',
-    '/urabenaoto-architecture-demo/images/philosophy/0006.jpg',
-    '/urabenaoto-architecture-demo/images/philosophy/0008.jpg',
-    '/urabenaoto-architecture-demo/images/philosophy/0012.jpg'
-  ],
-  profile: [
-    '/urabenaoto-architecture-demo/images/profile/0017.jpg',
-    '/urabenaoto-architecture-demo/images/profile/0018.jpg',
-    '/urabenaoto-architecture-demo/images/profile/0019.jpg'
-  ],
-  works: [
-    '/urabenaoto-architecture-demo/images/works/0020.jpg',
-    '/urabenaoto-architecture-demo/images/works/0021.jpg',
-    '/urabenaoto-architecture-demo/images/works/0022.jpg',
-    '/urabenaoto-architecture-demo/images/works/0023.jpg',
-    '/urabenaoto-architecture-demo/images/works/0024.jpg'
-  ],
-  contact: [
-    '/urabenaoto-architecture-demo/images/contact/0025.jpg',
-    '/urabenaoto-architecture-demo/images/contact/0027.jpg',
-    '/urabenaoto-architecture-demo/images/contact/0028.jpg',
-    '/urabenaoto-architecture-demo/images/contact/0029.jpg'
-  ]
-};
-
 // ページ読み込み完了時の処理
 document.addEventListener('DOMContentLoaded', () => {
   // スライダーの初期化
-  import('./image-slider.js').then(module => {
-    module.initializeSliders();
-    module.initializeWorksSlider();
+  import('./image-slider.js').then(() => {
+    initializeSliders();
+    initializeWorksSlider();
   });
   
   // 作品セクションの初期化
-  import('./works-loader.js').then(module => {
-    module.initializeWorks();
+  import('./works-loader.js').then(() => {
+    initializeWorks();
   });
   
   // ナビゲーションバーのスクロール効果

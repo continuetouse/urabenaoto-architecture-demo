@@ -121,7 +121,7 @@ async function initializeWorks() {
     
     images.forEach((image, index) => {
       const workItem = createWorkItem(
-        `${data.folder}/${image}`,
+        `${getBasePath()}${data.folder}/${image}`,
         `${data.title}`,
         data.description
       );
@@ -131,4 +131,5 @@ async function initializeWorks() {
 }
 
 // モジュールとしてエクスポート
-export { initializeWorks }; 
+// 初期化関数をグローバルに公開
+window.initializeWorks = initializeWorks; 

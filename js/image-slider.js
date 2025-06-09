@@ -176,6 +176,7 @@ function initializeWorksSlider() {
 
 // ページ読み込み時にスライダーを初期化
 document.addEventListener('DOMContentLoaded', async () => {
-  await initializeSliders();
+  window.initializeSliders = initializeSliders;
+  window.initializeWorksSlider = initializeWorksSlider;
   initializeWorksSlider();
 });
