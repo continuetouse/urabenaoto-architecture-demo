@@ -1,20 +1,10 @@
 // 画像フォルダのパス
 const imageFolders = {
-  hero: window.location.hostname === 'github.io' 
-    ? '/urabenaoto-architecture-demo/images/hero' 
-    : './images/hero',
-  philosophy: window.location.hostname === 'github.io' 
-    ? '/urabenaoto-architecture-demo/images/philosophy' 
-    : './images/philosophy',
-  profile: window.location.hostname === 'github.io' 
-    ? '/urabenaoto-architecture-demo/images/profile' 
-    : './images/profile',
-  works: window.location.hostname === 'github.io' 
-    ? '/urabenaoto-architecture-demo/images/works' 
-    : './images/works',
-  contact: window.location.hostname === 'github.io' 
-    ? '/urabenaoto-architecture-demo/images/contact' 
-    : './images/contact'
+  hero: './images/hero',
+  philosophy: './images/philosophy',
+  profile: './images/profile',
+  works: './images/works',
+  contact: './images/contact'
 };
 
 // 画像ファイルを取得する関数
@@ -43,11 +33,8 @@ async function loadImageData() {
   for (const [section, folder] of Object.entries(imageFolders)) {
     const files = await getImageFiles(folder);
     imageData[section] = files.map(file => {
-      const isGitHubPages = window.location.hostname === 'github.io';
-      const path = isGitHubPages 
-        ? `/urabenaoto-architecture-demo/${folder}/${file}`
-        : `./${folder}/${file}`;
-      return path;
+      // 相対パスを使用（GitHub Pagesとローカル環境の両方で動作）
+      return `${folder}/${file}`;
     });
   }
   return imageData;
