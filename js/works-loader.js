@@ -55,27 +55,17 @@ const worksCategories = {
 // 画像ファイルを取得する関数
 async function getImageFiles(folder) {
   try {
-    // 環境に応じたパス設定
-    const path = window.location.hostname === 'github.io'
-      ? `/urabenaoto-architecture-demo/images/works/${folder}/`
-      : `./images/works/${folder}/`;
-    const response = await fetch(path);
-    if (!response.ok) {
-      console.error(`Error: Could not access images/works/${folder}/ directory`);
-      return [];
-    }
-    const text = await response.text();
-    const parser = new DOMParser();
-    const html = parser.parseFromString(text, 'text/html');
-    const links = Array.from(html.querySelectorAll('a'))
-      .map(a => a.href)
-      .filter(href => {
-        const ext = href.split('.').pop().toLowerCase();
-        return ['jpg', 'jpeg', 'png', 'gif'].includes(ext);
-      })
-      .map(href => href.split('/').pop());
-    console.log(`Found ${links.length} images in ${folder} folder`);
-    return links;
+    // フォルダ内の画像ファイルを直接指定
+    const images = {
+      residential: ['0028.jpg'],
+      commercial: ['0027.jpg', '0029.jpg'],
+      office: ['0030.jpg'],
+      public: ['0031.jpg'],
+      renovation: ['0032.jpg'],
+      interior: []
+    };
+    
+    return images[folder] || [];
   } catch (error) {
     console.error('Error loading images:', error);
     return [];
@@ -88,7 +78,9 @@ function createWorkItem(imagePath, title, description) {
   workItem.className = 'work-item';
   
   const img = document.createElement('img');
-  img.src = `images/works/${imagePath}`;
+  img.src = window.location.hostname === 'github.io'
+    ? `/urabenaoto-architecture-demo/images/works/${imagePath}`
+    : `./images/works/${imagePath}`;
   img.alt = title;
   img.onerror = function() {
     console.error(`Error loading image: ${this.src}`);
@@ -125,7 +117,7 @@ async function initializeWorks() {
     
     images.forEach((image, index) => {
       const workItem = createWorkItem(
-        `${data.folder}/${image}`,
+        `${image}`,
         `${data.title}`,
         data.description
       );
