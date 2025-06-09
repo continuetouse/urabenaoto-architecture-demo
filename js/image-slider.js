@@ -1,19 +1,19 @@
 // 画像フォルダのパス
 const imageFolders = {
   hero: window.location.hostname === 'github.io' 
-    ? 'https://github.com/continuetouse/urabenaoto-architecture-demo/blob/main/images/hero' 
+    ? 'https://raw.githubusercontent.com/continuetouse/urabenaoto-architecture-demo/main/images/hero' 
     : './images/hero',
   philosophy: window.location.hostname === 'github.io' 
-    ? 'https://github.com/continuetouse/urabenaoto-architecture-demo/blob/main/images/philosophy' 
+    ? 'https://raw.githubusercontent.com/continuetouse/urabenaoto-architecture-demo/main/images/philosophy' 
     : './images/philosophy',
   profile: window.location.hostname === 'github.io' 
-    ? 'https://github.com/continuetouse/urabenaoto-architecture-demo/blob/main/images/profile' 
+    ? 'https://raw.githubusercontent.com/continuetouse/urabenaoto-architecture-demo/main/images/profile' 
     : './images/profile',
   works: window.location.hostname === 'github.io' 
-    ? 'https://github.com/continuetouse/urabenaoto-architecture-demo/blob/main/images/works' 
+    ? 'https://raw.githubusercontent.com/continuetouse/urabenaoto-architecture-demo/main/images/works' 
     : './images/works',
   contact: window.location.hostname === 'github.io' 
-    ? 'https://github.com/continuetouse/urabenaoto-architecture-demo/blob/main/images/contact' 
+    ? 'https://raw.githubusercontent.com/continuetouse/urabenaoto-architecture-demo/main/images/contact' 
     : './images/contact'
 };
 
@@ -148,7 +148,7 @@ function initializeWorksSlider() {
     slide.className = 'works-slide';
     const isGitHubPages = window.location.hostname === 'github.io';
     const imagePath = isGitHubPages
-      ? `/urabenaoto-architecture-demo/images/works/${image}`
+      ? `https://raw.githubusercontent.com/continuetouse/urabenaoto-architecture-demo/main/images/works/${image}`
       : `./images/works/${image}`;
     slide.style.backgroundImage = `url(${imagePath})`;
     slider.appendChild(slide);
