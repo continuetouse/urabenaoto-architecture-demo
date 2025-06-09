@@ -20,7 +20,12 @@ const imageFolders = {
 // 画像ファイルを取得する関数
 async function getImageFiles(folder) {
   try {
-    const response = await fetch(folder);
+    // GitHub Pagesの場合はリポジトリ名を含む正しいパスを使用
+    const path = window.location.hostname === 'github.io'
+      ? `/urabenaoto-architecture-demo/${folder}`
+      : folder;
+    
+    const response = await fetch(path);
     const text = await response.text();
     const parser = new DOMParser();
     const html = parser.parseFromString(text, 'text/html');
