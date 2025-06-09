@@ -1,28 +1,29 @@
 // 画像データのシミュレーション
 const imageData = {
   hero: [
-    './assets/images/hero/architecture1.jpg',
-    './assets/images/hero/architecture2.jpg',
-    './assets/images/hero/architecture3.jpg',
-    './assets/images/hero/architecture4.jpg',
-    './assets/images/hero/architecture5.jpg'
+    '/images/hero/architecture1.jpg',
+    '/images/hero/architecture2.jpg',
+    '/images/hero/architecture3.jpg',
+    '/images/hero/architecture4.jpg',
+    '/images/hero/architecture5.jpg'
   ],
   philosophy: [
-    './assets/images/philosophy/philosophy1.jpg',
-    './assets/images/philosophy/philosophy2.jpg',
-    './assets/images/philosophy/philosophy3.jpg',
-    './assets/images/philosophy/philosophy4.jpg'
+    '/images/philosophy/philosophy1.jpg',
+    '/images/philosophy/philosophy2.jpg',
+    '/images/philosophy/philosophy3.jpg',
+    '/images/philosophy/philosophy4.jpg'
   ],
   profile: [
-    './assets/images/profile/profile1.jpg',
-    './assets/images/profile/profile2.jpg',
-    './assets/images/profile/profile3.jpg'
+    '/images/profile/profile1.jpg',
+    '/images/profile/profile2.jpg',
+    '/images/profile/profile3.jpg'
   ],
   works: [
-    './assets/images/works/works-bg.jpg',
-    './assets/images/works/work1.jpg',
-    './assets/images/works/work2.jpg',
-    './assets/images/works/work3.jpg',
+    '/images/works/works-bg.jpg',
+    '/images/works/work1.jpg',
+    '/images/works/work2.jpg',
+    '/images/works/work3.jpg',
+    '/images/works/work4.jpg'
     './assets/images/works/work4.jpg'
   ],
   contact: [
