@@ -24,7 +24,8 @@ const translations = {
       title: 'プロフィール',
       name: '占部 直人 / Naoto Urabe',
       role: '建築家 / Architect',
-      bio: '1985年 東京生まれ。東京大学工学部建築学科卒業後、ヨーロッパの建築事務所での実務経験を経て、2015年に占部直人建築設計事務所を設立。住宅、オフィス、商業施設など、幅広い建築設計を手がける。'
+      bio: '1985年 東京生まれ。東京大学工学部建築学科卒業後、ヨーロッパの建築事務所での実務経験を経て、2015年に占部直人建築設計事務所を設立。住宅、オフィス、商業施設など、幅広い建築設計を手がける。',
+      awards: '日本建築学会賞、グッドデザイン賞など国内外での受賞歴多数。自然光を活かした空間構成と、素材の質感を大切にした設計アプローチに定評がある。'
     },
     works: {
       title: '作品',
@@ -74,7 +75,8 @@ const translations = {
       title: 'Profile',
       name: 'Naoto Urabe',
       role: 'Architect',
-      bio: 'Born in Tokyo in 1985. After graduating from the University of Tokyo\'s Department of Architecture, he gained practical experience at architectural firms in Europe before establishing Naoto Urabe Architecture in 2015. He handles a wide range of architectural designs including residences, offices, and commercial facilities.'
+      bio: 'Born in Tokyo in 1985. After graduating from the University of Tokyo\'s Department of Architecture, he gained practical experience at architectural firms in Europe before establishing Naoto Urabe Architecture in 2015. He handles a wide range of architectural designs including residences, offices, and commercial facilities.',
+      awards: 'Recipient of numerous awards including the Architectural Institute of Japan Award and Good Design Award. Known for his design approach that emphasizes spatial composition utilizing natural light and the quality of materials.'
     },
     works: {
       title: 'Works',
@@ -132,6 +134,7 @@ function switchLanguage(lang) {
   profile.querySelector('h3').textContent = t.profile.name;
   profile.querySelectorAll('p')[0].textContent = t.profile.role;
   profile.querySelectorAll('p')[1].textContent = t.profile.bio;
+  profile.querySelectorAll('p')[2].textContent = t.profile.awards;
   
   // 作品セクション
   const works = document.querySelector('.works-content');
